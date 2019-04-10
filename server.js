@@ -30,3 +30,13 @@ require("./app/routes/api-routes")(app);
 app.listen(PORT, function() {
   console.log("App running on port " + PORT + "!");
 });
+
+
+/*
+Todo:
+Display articles without saving
+When "saved" add to database
+Identify how many I'm pulling
+Add note taking functionality
+Be able to remove comments and saved articles
+*/
