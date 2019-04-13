@@ -85,8 +85,10 @@ $("#scrape").on("click",function(){
   $.getJSON("/scrape",function(data){
     console.log(data)
   }).then(function(){
+    console.log("scraping done")
+    
     displayPage()
-  
+    window.reload()
 })
 })
 

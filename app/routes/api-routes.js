@@ -29,12 +29,10 @@ module.exports = function(app){
         // Create a new Article using the `result` object built from scraping
         db.Article.create(result)
           .then(function(dbArticle) {
+            res.json(dbArticle)
             console.log("===============================")
             // View the added result in the console
-            res.send(updatedArticles++)
             console.log(dbArticle);
-          }).then(function(){
-            console.log("This amount of new posts: " + updatedArticles)
           })
           .catch(function(err) {
 
