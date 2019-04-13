@@ -9,12 +9,16 @@ var Schema = mongoose.Schema;
 var ArticleSchema = new Schema({
   // `title` is required and of type String
   title: {
-    type: String,
+    type: String, unique:true
 
   },
   link: {
-    type: String,
+    type: String, unique:true
 
+  },
+  note: {
+    type:Schema.Types.ObjectId,
+    ref:"Note"
   }
 });
 

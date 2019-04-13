@@ -1,5 +1,4 @@
 // Scrape reddit when the page loads and update the database with all the new posts
-var db = require("./models");
 const express = require('express')
 const app = express()
 const PORT = 3000
@@ -34,9 +33,6 @@ app.listen(PORT, function() {
 
 /*
 Todo:
-Display articles without saving
-When "saved" add to database
 Identify how many I'm pulling
-Add note taking functionality
 Be able to remove comments and saved articles
 */
