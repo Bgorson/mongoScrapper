@@ -8,6 +8,9 @@ var cheerio = require("cheerio");
 
 
 module.exports = function(app){
+  app.get('*', (request, response) => {
+    response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  });
   app.get("/", function(req,res){
     res.render("index")
   })

@@ -8,6 +8,10 @@ var exphbs = require("express-handlebars");
 // Our scraping tools
 // Axios is a promised-based http library, similar to jQuery's Ajax method
 // It works on the client and on the server
+if (process.env.NODE_ENV === 'production') {
+	app.use(express.static('client/build'));
+}
+
 
 
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
@@ -39,6 +43,8 @@ app.engine(
       }
   })
 );
+
+
 app.set("view engine", "handlebars");
 //require routes
 require("./app/routes/api-routes")(app);
