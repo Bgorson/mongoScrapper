@@ -1,24 +1,48 @@
-//Logic for creating the page data that is scrapped and button events
-
+var articles= [];
 // Grab the articles as a json
-var displayPage= function(){
-$.getJSON("/articles", function(data) {
+ 
   // For each one
-  for (var i = 0; i < data.length; i++) {
-    // Display the apropos information on the page
-    $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
-  }
-});
-}
 
+$(document).on("click", ".saveArt", function(){
+ 
+  var id= ($(this).attr("positionid"))
+  var title= ($('.title'+id).text())
+  var link= ($('.link'+id).text())
+  console.log(id)
+  console.log(title)
+  $.ajax({
+    method:"POST",
+    url:"/articles/save",
+    data:{ 
+      title: title,
+      link:link
+    }
+  }).then(function(){
+    console.log('saved')
+  })
+  
+  
+})
 
+$(document).on("click", "#savedArticles",function(){
+  $.ajax({
+    method:"Get",
+    url:"/articles"
+  }).then(function(results){
+    console.log("viewing saved")
+    console.log(results)
+    location.href = "/articles"
+  })
+})
 
-$(document).on("click", "p", function() {
+$(document).on("click", ".saved", function() {
+
   // Empty the notes from the note section
   $("#notes").empty();
+
   // Save the id from the p tag
   var thisId = $(this).attr("data-id");
-
+  console.log(thisId)
   // Now make an ajax call for the Article
   $.ajax({
     method: "GET",
@@ -26,6 +50,19 @@ $(document).on("click", "p", function() {
   })
     // With that done, add the note information to the page
     .then(function(data) {
+      var span = document.getElementsByClassName("close")[0];
+      var modal = document.getElementById('myModal');
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+      modal.style.display = "block";
+      span.onclick = function() {
+        modal.style.display = "none";
+      }
+    
+
       console.log(data);
       // The title of the article
       $("#notes").append("<h2>" + data.title + "</h2>");
@@ -43,11 +80,12 @@ $(document).on("click", "p", function() {
         // Place the body of the note in the body textarea
         $("#bodyinput").val(data.note.body);
       }
-    });
-});
 
+    });
+  })
 // When you click the savenote button
 $(document).on("click", "#savenote", function() {
+ 
   // Grab the id associated with the article from the submit button
   var thisId = $(this).attr("data-id");
 
@@ -64,10 +102,12 @@ $(document).on("click", "#savenote", function() {
   })
     // With that done
     .then(function(data) {
+      $("#myModal").css("display","none")
       // Log the response
       console.log(data);
       // Empty the notes section
       $("#notes").empty();
+      
     });
 
   // Also, remove the values entered in the input and textarea for note entry
@@ -77,22 +117,33 @@ $(document).on("click", "#savenote", function() {
     
 
 
-$(document).on("click", ".save", function(){
-  console.log($(this).attr("id"))
-})
-
 $("#scrape").on("click",function(){
-  $.getJSON("/scrape",function(data){
-    console.log(data)
-  }).then(function(){
-    console.log("scraping done")
-    
-    displayPage()
-    window.reload()
+
+  $.ajax({
+    method: "GET",
+    url: "/scrape"
+  })
+  .then(function(result){
+    // articles.push(result)
+    // displayPage(result)
+    location.href="/scrape"
 })
 })
 
-displayPage();
+$(document).on("click", ".delete",function(){
+  var id = {info: $(this).attr("data-id")}
+  console.log(id)
+  $.ajax({
+    method:"DELETE",
+    url:"/delete/"+ id.info,
+  }).then(function(res){
+    console.log("worked")
+    console.log(res)
+    window.location.reload();
+  })
+})
 
-//****** */Why can't I refresh page on page load? ************
 
+//Changes to make:
+// Create a database of "saved" articles
+//add delete functionality

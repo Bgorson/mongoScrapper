@@ -1,0 +1,18 @@
+    <div>
+        <button id = "savedArticles">See Saved Articles Only and Comment on them</button>
+    <button id= "scrape">Scrape Reddit</button>
+    
+    <div id= "articles"></div>
+    {{#each result}}
+     <p>{{this.title}}<br />{{this.link}}</p> <button class = 'delete' data-id='{{this._id}}' >Delete</button> <button class = 'saved' data-id='{{this._id}}'>Edit Note</button>
+    {{/each}}
+
+    <div id ="myModal" class= "modal">
+    <div class= "modal-content">
+        <span class="close">&times;</span>
+        <div id="notes"></div>
+    </div>
+    </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../js/app.js"></script>
