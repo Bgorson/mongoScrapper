@@ -1,21 +1,37 @@
-    <div>
-        <button id = "savedArticles">See Saved Articles Only and Comment on them</button>
-    <button id= "scrape">Go and Get some more Reddit</button>
-    <button id= "home">Home</button>
-    <div id= "articles"></div>
+{{!-- NAV PARTIAL --}}
+<div class="nav">
+  {{>navBar}}
+</div>
+<br><br>
+       
+    <div id= "articles">
+       
+    </div>
+    <div class="jumbotron">
+       <h1>Welcome to the Reddit Web Developer Scrapper</h1>
+    </div>
+    
+<div class="row">{{#if responses}}
 {{#each responses}}
-     <div id= {{this.id}}>
-     <p class = "title{{this.id}}">{{this.title}}<br /></p>
-     <p class= "link{{this.id}}">{{this.link}}</p>
-     <button positionid= {{this.id}} class = 'saveArt'>Save</button>
-     </div>
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"></h5>
+        <p class="card-text-center title{{this.id}}">{{this.title}}</p>
+        <a positionid= {{this.id}} class="btn btn-primary saveArt">Save it</a>
+        <a target="_blank" class= "btn btn-primary link{{this.id}}" href={{detectReddit this.link}}>Check out the page</a>
+      </div>
+    </div>
+  </div>
+
     {{/each}}
-    {{!-- <div id ="myModal" class= "modal">
-    <div class= "modal-content">
-        <span class="close">&times;</span>
-        <div id="notes"></div> --}}
+    {{else}}
+    
+
+    </div>
+    <h1 class= "text-center">Go Scrape something</h1>
+        {{/if}}
     </div>
     </div>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="../js/app.js"></script>

@@ -1,11 +1,32 @@
-    <div>
-        <button id = "savedArticles">See Saved Articles Only and Comment on them</button>
-    <button id= "scrape">Scrape Reddit</button>
-    
+    {{!-- NAV PARTIAL --}}
+<div class="nav">
+  {{>navBar}}
+</div>
+<br><br>
+    <div class="row">
+     {{#if result}}
     <div id= "articles"></div>
     {{#each result}}
-     <p>{{this.title}}<br />{{this.link}}</p> <button class = 'delete' data-id='{{this._id}}' >Delete</button> <button class = 'saved' data-id='{{this._id}}'>Edit Note</button>
+      <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"></h5>
+        <p class="card-text-center title{{this.id}}">{{this.title}}</p>
+        <a target="_blank" class= " btn btn-primary" href={{this.link}}>Check out the page</a>
+        <button class = 'btn btn-danger delete' data-id='{{this._id}}' >Delete</button> 
+        <button class = 'btn btn-secondary saved' data-id='{{this._id}}'>Edit Note</button>
+      </div>
+    </div>
+  </div>
+     {{!-- <p>{{this.title}}<br />{{this.link}}</p>  --}}
     {{/each}}
+    
+
+    {{else}}
+    </div>
+  
+      <h1 class="text-center" >You have nothing saved here</h1>
+    {{/if}}
 
     <div id ="myModal" class= "modal">
     <div class= "modal-content">
@@ -13,6 +34,4 @@
         <div id="notes"></div>
     </div>
     </div>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="../js/app.js"></script>
+

@@ -2,14 +2,20 @@ var articles= [];
 // Grab the articles as a json
  
   // For each one
+  $(".dropdown-menu li a").click(function(){
+    $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
+    $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+  });
+
 
 $(document).on("click", ".saveArt", function(){
- 
+  $(this).addClass('clicked')
   var id= ($(this).attr("positionid"))
   var title= ($('.title'+id).text())
-  var link= ($('.link'+id).text())
+  var link= ($('.link'+id).attr('href'))
   console.log(id)
   console.log(title)
+  console.log(link)
   $.ajax({
     method:"POST",
     url:"/articles/save",
@@ -85,7 +91,6 @@ $(document).on("click", ".saved", function() {
   })
 // When you click the savenote button
 $(document).on("click", "#savenote", function() {
- 
   // Grab the id associated with the article from the submit button
   var thisId = $(this).attr("data-id");
 
@@ -114,16 +119,15 @@ $(document).on("click", "#savenote", function() {
   $("#titleinput").val("");
   $("#bodyinput").val("");
 });
-    
 
 
 $("#scrape").on("click",function(){
-
   $.ajax({
     method: "GET",
     url: "/scrape"
   })
   .then(function(result){
+    // console.log(result)
     // articles.push(result)
     // displayPage(result)
     location.href="/scrape"

@@ -25,9 +25,18 @@ app.use(express.static("./app/public"));
 app.engine(
   "handlebars",
   exphbs({
-    defaultLayout: "main"
-    // helpers:{
-    //   }
+    defaultLayout: "main",
+    helpers:{
+      detectReddit: function(link){
+        const regex = /^\/r\//gm;
+        if (regex.exec(link)){
+          return "https://www.reddit.com"+link
+        }
+        else {
+          return link
+        }
+      }
+      }
   })
 );
 app.set("view engine", "handlebars");

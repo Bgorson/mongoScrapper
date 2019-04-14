@@ -35,3 +35,51 @@
     text-decoration: none;
     cursor: pointer;
   }
+
+  #scrape{
+    margin-left:1em;
+  }
+  .jumbotron{
+    background-image: url("../images/crossline-lines.png");
+
+  }
+body {
+  background-image:url("../images/white-waves.png")
+}
+.card{
+  margin-left:1em;
+  margin-right:1em;
+  margin-top:.5em;
+}
+.saveArt:hover{
+  cursor: pointer;
+}
+
+@keyframes myAnimation{
+  0%{
+    opacity: 1;
+    transform: rotateX(90deg);
+  }
+  50%{
+    opacity: 0.5;
+    transform: rotateX(0deg);
+  }
+  100%{
+    display: none;
+    opacity: 0;
+    transform: rotateX(90deg);
+  }
+}
+
+.saveArt.clicked{
+    animation-name: myAnimation;
+    animation-duration: 2000ms;
+    animation-fill-mode: forwards;
+}
+
+.btn.primary,.btn-warning{
+  color: white;
+}
+a:not([href]):not([tabindex]){
+  color:white;
+}
