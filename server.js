@@ -1,16 +1,14 @@
 // Scrape reddit when the page loads and update the database with all the new posts
 const express = require('express')
 const app = express()
-const PORT = 3000
+var PORT = process.env.PORT || 3000;
 var mongoose = require("mongoose");
 var logger = require("morgan");
 var exphbs = require("express-handlebars");
 // Our scraping tools
 // Axios is a promised-based http library, similar to jQuery's Ajax method
 // It works on the client and on the server
-if (process.env.NODE_ENV === 'production') {
-	app.use(express.static('client/build'));
-}
+
 
 
 
